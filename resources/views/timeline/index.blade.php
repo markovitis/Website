@@ -57,7 +57,7 @@
 								@endif
 							</ul>
 							<input type="hidden" name="type" value="<?= $lastReplier = $status->user ?>" >
-
+		
 							@foreach ($status->replies as $reply)
 								<div class="media">
 									<a class="pull-left" href="{{ route('profile.index', ['username' => $reply->user->username]) }}">
@@ -95,6 +95,8 @@
 								<input type="hidden" name="type" value="<?= $lastReplier = $reply->user ?>" >
 							
 
+							@endforeach
+
 							@if ($lastReplier->party !== Auth::user()->party)
 							<form role="form" action="{{ route('status.reply', ['statusId' => $status->id]) }}" method="post">
 								<div class="form-group{{ $errors->has("reply-{$status->id}") ? ' has-error' : '' }}">
@@ -111,7 +113,8 @@
 							@endif
 
 
-							@endforeach
+							<!-- For recursive commenting: -->
+							<!-- end for each -- used to be here -->
 						</div>
 					</div>
 				@endforeach
